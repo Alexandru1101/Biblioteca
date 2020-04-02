@@ -6,24 +6,36 @@ using System.Threading.Tasks;
 
 namespace Biblioteca
 {
+	public enum Categorii
+	{
+		Carte_politista=1,
+		Carte_pentru_copii=2,
+		Carte_horror=3,
+		Literatura_clasica=4,
+		Poezie=5,
+		SF=6,
+		Fantasy=7
+
+	}
     class Carte
     {
         
-        private string nume, autor;
+        private string nume, autor,gen;
         private int nr_exemplare;
         public Carte()
                 {
                     nume =string.Empty;
                     autor =string.Empty;
                     nr_exemplare = 0;
-
+					gen = string.Empty;
                 }
 
-        public Carte(string n, string a, int nr)
+        public Carte(string n, string a, int nr,int opt)
                 {
                     nume = n;
                     autor = a;
                     nr_exemplare = nr;
+					gen = Convert.ToString((Categorii)opt);
                 }
 
         //Tema 3
@@ -33,9 +45,10 @@ namespace Biblioteca
             nume = buff[0];
             autor = buff[1];
             nr_exemplare = Convert.ToInt32(buff[2]);
+			gen= Convert.ToString((Categorii)Convert.ToInt32(buff[3]));
 
 
-        }
+		}
         //Tema 3
 
         //Tema 4
@@ -45,9 +58,25 @@ namespace Biblioteca
         //Tema 4
         public void DisplayInfo()
         {
-            System.Console.WriteLine("Nume\tAutor\tNr.Exemplare");
-            System.Console.WriteLine(nume + "\t" + autor + "\t" + nr_exemplare);
+            System.Console.WriteLine("Nume\tAutor\tNr.Exemplare\tGen");
+            System.Console.WriteLine(nume + "\t" + autor + "\t" + nr_exemplare+ "\t"+gen);
         }
-    }
+
+
+		public static bool operator ==(Carte a,Carte b)
+		{
+			if (a.Autor == b.autor && a.Nume == b.nume && a.nr_exemplare == b.nr_exemplare)
+				return true;
+			else return false;
+		}
+
+		public static bool operator !=(Carte a, Carte b)
+		{
+			if (a.Autor == b.autor && a.Nume == b.nume && a.nr_exemplare == b.nr_exemplare)
+				return false;
+			else return true;
+		}
+
+	}
 }
 

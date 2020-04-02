@@ -10,11 +10,11 @@ namespace Biblioteca
     {
         static void Main(string[] args)
         {
-            var c1 = new Carte("titlu", "autor", 15);
+            var c1 = new Carte("Ion", "Rebreanu", 15,4);
             c1.DisplayInfo();
             var c2 = new Carte();
             c2.DisplayInfo();
-            var c3 = new Carte("Ion,Rebreanu,8");
+            var c3 = new Carte("Lotr,J.R.R Tolkien ,8,7");
             c3.DisplayInfo();
             var c4 = CitireCarteTastatura();
             c4.DisplayInfo();
@@ -34,7 +34,17 @@ namespace Biblioteca
             Console.WriteLine("Introduceti nr de exemplare");
             int nr_ex = Convert.ToInt32(Console.ReadLine());
 
-            Carte c = new Carte(nume, autor, nr_ex);
+			Console.WriteLine("Selectati genul");
+			Console.WriteLine("1 -Carte politista \n" +
+							  "2 - Carte pentru copii \n" +
+							  "3 - Carte horror, \n" +
+							  "4 - Literatura clasica \n" +
+							  "5 - Poezie \n" +
+							  "6 - SF \n"+
+							  "7 - Fantasy \n");
+			int opt = Convert.ToInt32(Console.ReadLine());
+
+			Carte c = new Carte(nume, autor, nr_ex,opt);
             return c;
         }
     }
