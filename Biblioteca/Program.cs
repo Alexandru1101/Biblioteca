@@ -8,19 +8,15 @@ namespace Biblioteca
 {
     class Program
     {
+		static IStocareData stocare = new Acces_fisier("data.txt");
+
         static void Main(string[] args)
         {
-            var c1 = new Carte("Ion", "Rebreanu", 15,4);
-            c1.DisplayInfo();
-            var c2 = new Carte();
-            c2.DisplayInfo();
-            var c3 = new Carte("Lotr,J.R.R Tolkien ,8,7");
-            c3.DisplayInfo();
-            var c4 = CitireCarteTastatura();
-            c4.DisplayInfo();
-        
-
-            Console.ReadKey();
+			Carte c = stocare.Cautare("test");
+			c.DisplayInfo();
+			var c4 = CitireCarteTastatura();
+			stocare.Editare(c.Nume, c4);
+			Console.ReadKey();
         }
 
     public static Carte CitireCarteTastatura()

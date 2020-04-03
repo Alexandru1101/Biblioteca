@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Biblioteca
 {
 	public enum Categorii
-	{
+	{	Nedefinit=0,
 		Carte_politista=1,
 		Carte_pentru_copii=2,
 		Carte_horror=3,
@@ -17,25 +17,26 @@ namespace Biblioteca
 		Fantasy=7
 
 	}
-    class Carte
+    public class Carte
     {
         
-        private string nume, autor,gen;
+        private string nume, autor;
+		private Categorii gen;
         private int nr_exemplare;
         public Carte()
                 {
-                    nume =string.Empty;
-                    autor =string.Empty;
-                    nr_exemplare = 0;
-					gen = string.Empty;
+                    Nume =string.Empty;
+                    Autor =string.Empty;
+                    NrExemplare = 0;
+					Gen = Categorii.Nedefinit;
                 }
 
         public Carte(string n, string a, int nr,int opt)
                 {
-                    nume = n;
-                    autor = a;
-                    nr_exemplare = nr;
-					gen = Convert.ToString((Categorii)opt);
+                    Nume = n;
+                    Autor = a;
+                    NrExemplare = nr;
+					Gen =(Categorii)opt;
                 }
 
         //Tema 3
@@ -45,18 +46,20 @@ namespace Biblioteca
             nume = buff[0];
             autor = buff[1];
             nr_exemplare = Convert.ToInt32(buff[2]);
-			gen= Convert.ToString((Categorii)Convert.ToInt32(buff[3]));
+			gen=(Categorii)Convert.ToInt32(buff[3]);
 
 
 		}
         //Tema 3
 
         //Tema 4
-        public string Nume { get; set; }
-        public string Autor { get; set; }
-        public string NrExemplare { get; set; }
-        //Tema 4
-        public void DisplayInfo()
+        public string Nume { get =>nume; set => nume = value; }
+        public string Autor { get =>autor; set =>autor =value; }
+        public int NrExemplare { get=> nr_exemplare; set=>nr_exemplare=value; }
+		public Categorii Gen { get => gen; set => gen = value; }
+
+		//Tema 4
+		public void DisplayInfo()
         {
             System.Console.WriteLine("Nume\tAutor\tNr.Exemplare\tGen");
             System.Console.WriteLine(nume + "\t" + autor + "\t" + nr_exemplare+ "\t"+gen);
@@ -77,6 +80,10 @@ namespace Biblioteca
 			else return true;
 		}
 
+		public override string ToString()
+		{
+			return $"{nume},{autor},{nr_exemplare},{(int) gen}";
+		}
 	}
 }
 
